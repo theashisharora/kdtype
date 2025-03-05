@@ -153,7 +153,7 @@ export class Game extends EventEmitter<GameEvents> {
    * @public
    */
   @computed private get nextLetter() {
-    return this.currentWord[this.currentIndex]
+    return this.currentPronunciation[this.currentIndex]
   }
 
   /**
@@ -196,23 +196,13 @@ export class Game extends EventEmitter<GameEvents> {
   }
 
   @action private handleLetterInput(key: string) {
-    const { ignoreCasing } = this.settings
-
-    // Did the user just press the right key?
-    const isRight = ignoreCasing
-      ? key.toLowerCase() === this.nextLetter.toLowerCase()
-      : key === this.nextLetter
-
-    if (isRight) {
+    if (key === this.nextLetter) {
       this.currentIndex++
-      this.emit('input_right', this)
+      if (this.currentIndex === this.currentPronunciation.length) {
+        this.setState('word_complete')
+      }
     } else {
       this.emit('input_wrong', this)
-    }
-
-    // Did the user just complete the word?
-    if (this.currentIndex > this.currentWord.length - 1) {
-      this.completeWord()
     }
   }
 

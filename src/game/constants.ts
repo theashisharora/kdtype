@@ -11,8 +11,8 @@ export const GAME_EVENTS = [
 ] as const
 
 export const ALL_WORDS = SANSKRIT_WORDS.map((entry) => ({
-  word: entry.word.toLowerCase(),
-  pronunciation: entry.pronunciation,
+  word: entry.word,
+  pronunciation: entry.pronunciation.toLowerCase(),
   meaning: entry.meaning,
 }))
 
