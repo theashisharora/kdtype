@@ -1,7 +1,4 @@
-import THREE_LETTER_WORDS from './words/three-letter-words.json'
-import FOUR_LETTER_WORDS from './words/four-letter-words.json'
-import FIVE_LETTER_WORDS from './words/five-letter-words.json'
-import SIX_LETTER_WORDS from './words/six-letter-words.json'
+import SANSKRIT_WORDS from './words/sanskrit-words.json'
 
 export const GAME_EVENTS = [
   'game_start',
@@ -13,12 +10,11 @@ export const GAME_EVENTS = [
   'word_complete',
 ] as const
 
-export const ALL_WORDS = [
-  ...THREE_LETTER_WORDS,
-  ...FOUR_LETTER_WORDS,
-  ...FIVE_LETTER_WORDS,
-  ...SIX_LETTER_WORDS,
-].map((word) => word.toLowerCase())
+export const ALL_WORDS = SANSKRIT_WORDS.map((entry) => ({
+  word: entry.word.toLowerCase(),
+  pronunciation: entry.pronunciation,
+  meaning: entry.meaning,
+}))
 
 /**
  * A mapping of game events to Audio elements used to play sound effects.

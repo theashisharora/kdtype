@@ -18,6 +18,7 @@ export const CurrentWord = observer(function CurrentWord() {
 
   return (
     <div className="currentword">
+      <div className="pronunciation">Pronunciation: {game.currentPronunciation}</div>
       <input ref={rInput} className="input" autoFocus />
       {game.currentWord.split('').map((letter, i) => (
         <span
@@ -35,6 +36,7 @@ export const CurrentWord = observer(function CurrentWord() {
           {letter}
         </span>
       ))}
+      <div className="meaning">Meaning: {game.currentMeaning}</div>
     </div>
   )
 })

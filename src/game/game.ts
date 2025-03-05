@@ -62,21 +62,23 @@ export class Game extends EventEmitter<GameEvents> {
    * @public
    */
   @computed get currentWord() {
-    const { _currentWord, settings } = this
+    return this._currentWord.word
+  }
 
-    switch (settings.casing) {
-      case 'lower': {
-        return _currentWord.toLowerCase()
-      }
-      case 'upper': {
-        return _currentWord.toUpperCase()
-      }
-      case 'start': {
-        const letters = _currentWord.toLowerCase().split('')
-        letters[0] = letters[0].toUpperCase()
-        return letters.join('')
-      }
-    }
+  /**
+   * The current pronunciation.
+   * @public
+   */
+  @computed get currentPronunciation() {
+    return this._currentWord.pronunciation
+  }
+
+  /**
+   * The current meaning.
+   * @public
+   */
+  @computed get currentMeaning() {
+    return this._currentWord.meaning
   }
 
   /**
@@ -138,7 +140,7 @@ export class Game extends EventEmitter<GameEvents> {
   /**
    * The array of words.
    */
-  private words = this.getWords()
+  @observable private words = [...ALL_WORDS]
 
   /**
    * The current word (in its raw format).
@@ -166,7 +168,7 @@ export class Game extends EventEmitter<GameEvents> {
   }
 
   @action private getWords(maxLength = 3) {
-    return ALL_WORDS.filter((word) => word.length <= maxLength).filter(isNotProfane)
+    return ALL_WORDS.filter((word) => word.word.length <= maxLength && isNotProfane(word.word))
   }
 
   @action private getNextWord() {

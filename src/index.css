@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap');
 
 body {
   margin: 0;
@@ -31,6 +32,7 @@ body {
   font-size: 160px;
   font-weight: bold;
   transform-origin: center center;
+  text-align: center;
   opacity: 0;
   color: black;
   font-family: 'Itim', -apple-system, sans-serif;
@@ -236,4 +238,20 @@ body {
 
 .settings-button:hover svg {
   stroke: rgb(0 0 0 / 70%);
+}
+
+.pronunciation {
+  font-size: 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.meaning {
+  font-size: 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }

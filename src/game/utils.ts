@@ -33,6 +33,18 @@ export function isNotProfane(word: string) {
 }
 
 /**
+ * Return a random value from an array and remove the value from the array.
+ * @returns The random value.
+ * @note This operation mutates the array.
+ */
+export function sampleAndRemove(words: { word: string; pronunciation: string; meaning: string }[]) {
+  const index = randomIndex(words)
+  const word = words[index]
+  words.splice(index, 1)
+  return word
+}
+
+/**
  * Get a random index from an array.
  *
  * @param arr The array to get the index from.
@@ -40,16 +52,4 @@ export function isNotProfane(word: string) {
  */
 export function randomIndex(arr: unknown[]): number {
   return Math.floor(Math.random() * arr.length)
-}
-
-/**
- * Return a random value from an array and remove the value from the array.
- * @returns The random value.
- * @note This operation mutates the array.
- */
-export function sampleAndRemove<T>(arr: T[]): T {
-  const index = randomIndex(arr)
-  const item = arr[index]
-  arr.splice(index, 1)
-  return item
 }
