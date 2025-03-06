@@ -94,6 +94,7 @@ body {
 
 .currentword > span[data-status='current'] {
   color: red;
+  font-weight: bold;
   animation-name: letter_current;
   animation-duration: 1s;
   animation-delay: 0.25s;
