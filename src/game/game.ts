@@ -198,8 +198,9 @@ export class Game extends EventEmitter<GameEvents> {
   @action private handleLetterInput(key: string) {
     if (key === this.nextLetter) {
       this.currentIndex++
+      this.emit('input_right', this)
       if (this.currentIndex === this.currentPronunciation.length) {
-        this.setState('word_complete')
+        this.completeWord()
       }
     } else {
       this.emit('input_wrong', this)

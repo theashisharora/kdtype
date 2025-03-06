@@ -18,7 +18,9 @@ export function useSoundEffects() {
 
       elm.pause()
       elm.currentTime = 0
-      elm.play()
+      elm.play().catch((error) => {
+        console.error(`Failed to play sound for event ${event}:`, error)
+      })
     }
 
     const unsubs = GAME_EVENTS.map((eventName) => {
@@ -30,5 +32,5 @@ export function useSoundEffects() {
     return () => {
       unsubs.forEach((unsub) => unsub())
     }
-  }, [])
+  }, [game])
 }

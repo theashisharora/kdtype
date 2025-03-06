@@ -26,14 +26,14 @@ export const CurrentWord = observer(function CurrentWord() {
       {syllables.map((syllable, i) => (
         <span
           key={i}
-          data-status={
+          className={
             game.state === 'word_complete'
               ? 'celebrate'
-              : i === game.currentIndex
+              : 3 * i === game.currentIndex
               ? 'current'
-              : i < game.currentIndex
+              : 3 * i < game.currentIndex
               ? 'celebrate'
-              : false
+              : ''
           }
         >
           {syllable}
