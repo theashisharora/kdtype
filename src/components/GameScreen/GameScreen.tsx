@@ -32,6 +32,7 @@ export const GameScreen = observer(function GameScreen() {
   return (
     <div className={`game`} data-state={game.state} onPointerDown={handlePointerDown}>
       <Settings />
+      <div className="score">Score: {game.score}</div> {/* Display the score */}
       <CurrentWord />
       <Celebration />
     </div>

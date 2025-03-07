@@ -58,6 +58,20 @@ export class Game extends EventEmitter<GameEvents> {
   @observable currentIndex = 0
 
   /**
+   * The current score.
+   * @public
+   */
+  @observable score = 0
+
+  /**
+   * The remaining time for the current word.
+   * @public
+   */
+  @observable remainingTime = 0
+
+  private timerId: NodeJS.Timeout | null = null
+
+  /**
    * The current word (in its cased format).
    * @public
    */
@@ -193,11 +207,13 @@ export class Game extends EventEmitter<GameEvents> {
     this.emit('word_start', this)
     this.setState('word_spelling')
     this.setState('word_transitioning_in')
+    this.startTimer()
   }
 
   @action private handleLetterInput(key: string) {
     if (key === this.nextLetter) {
       this.currentIndex++
+      this.score += 10 // Increment score for each correct letter
       this.emit('input_right', this)
       if (this.currentIndex === this.currentPronunciation.length) {
         this.completeWord()
@@ -208,16 +224,44 @@ export class Game extends EventEmitter<GameEvents> {
   }
 
   @action private completeWord() {
+    this.score += 50 // Increment score for completing a word
     this.emit('word_complete', this)
     this.setState('word_complete')
+    this.clearTimer()
   }
 
   @action private resetGame() {
     this.words = this.getWords()
     this.currentIndex = 0
     this._currentWord = this.getNextWord()
+    this.score = 0 // Reset score when the game is reset
     this.emit('game_reset', this)
     this.setState('word_spelling')
+    this.startTimer()
+  }
+
+  @action private startTimer() {
+    this.remainingTime = 10 // Set the time limit for each word (e.g., 10 seconds)
+    this.clearTimer()
+    this.timerId = setInterval(() => {
+      this.remainingTime--
+      if (this.remainingTime <= 0) {
+        this.handleTimeout()
+      }
+    }, 1000)
+  }
+
+  @action private clearTimer() {
+    if (this.timerId) {
+      clearInterval(this.timerId)
+      this.timerId = null
+    }
+  }
+
+  @action private handleTimeout() {
+    this.clearTimer()
+    this.emit('input_wrong', this)
+    this.unloadCurrentWord()
   }
 }
 

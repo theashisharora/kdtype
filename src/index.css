@@ -272,3 +272,12 @@ body {
   justify-content: center;
   position: relative;
 }
+
+.score {
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  color: black;
+}
