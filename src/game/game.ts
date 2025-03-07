@@ -9,6 +9,8 @@ export type GameState =
   | 'word_transitioning_in'
   | 'word_spelling'
   | 'word_complete'
+  | 'game_over'
+  | 'game_won' // Add new state for game won
 
 export type GameEvent = typeof GAME_EVENTS[number]
 
@@ -69,6 +71,12 @@ export class Game extends EventEmitter<GameEvents> {
    */
   @observable remainingTime = 0
 
+  /**
+   * The current time limit for each word.
+   * @public
+   */
+  @observable currentTimeLimit = 10 // Initial time limit
+
   private timerId: NodeJS.Timeout | null = null
 
   /**
@@ -128,6 +136,7 @@ export class Game extends EventEmitter<GameEvents> {
           }
           case 'word_transitioning_in': {
             this.setState('word_spelling')
+            this.startTimer() // Start the timer when the first word is loaded
             break
           }
         }
@@ -197,8 +206,8 @@ export class Game extends EventEmitter<GameEvents> {
   @action private loadNextWord() {
     // Enter the word_starting state
     if (this.words.length === 0) {
-      // If we've somehow ran out of words, reset the game instead
-      this.resetGame()
+      // If we've somehow ran out of words, end the game as a win
+      this.endGame(true)
       return
     }
 
@@ -208,6 +217,9 @@ export class Game extends EventEmitter<GameEvents> {
     this.setState('word_spelling')
     this.setState('word_transitioning_in')
     this.startTimer()
+
+    // Decrease the time limit for the next word, but not below 3 seconds
+    this.currentTimeLimit = Math.max(3, this.currentTimeLimit - 1)
   }
 
   @action private handleLetterInput(key: string) {
@@ -228,6 +240,9 @@ export class Game extends EventEmitter<GameEvents> {
     this.emit('word_complete', this)
     this.setState('word_complete')
     this.clearTimer()
+    setTimeout(() => {
+      this.unloadCurrentWord()
+    }, 1000) // Add a delay to allow the animation to complete
   }
 
   @action private resetGame() {
@@ -235,13 +250,14 @@ export class Game extends EventEmitter<GameEvents> {
     this.currentIndex = 0
     this._currentWord = this.getNextWord()
     this.score = 0 // Reset score when the game is reset
+    this.currentTimeLimit = 10 // Reset time limit when the game is reset
     this.emit('game_reset', this)
     this.setState('word_spelling')
     this.startTimer()
   }
 
   @action private startTimer() {
-    this.remainingTime = 10 // Set the time limit for each word (e.g., 10 seconds)
+    this.remainingTime = this.currentTimeLimit // Use the current time limit
     this.clearTimer()
     this.timerId = setInterval(() => {
       this.remainingTime--
@@ -260,8 +276,12 @@ export class Game extends EventEmitter<GameEvents> {
 
   @action private handleTimeout() {
     this.clearTimer()
-    this.emit('input_wrong', this)
-    this.unloadCurrentWord()
+    this.endGame(false)
+  }
+
+  @action private endGame(won: boolean) {
+    this.emit(won ? 'game_won' : 'game_over', this)
+    this.setState(won ? 'game_won' : 'game_over')
   }
 }
 

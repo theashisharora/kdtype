@@ -33,6 +33,9 @@ export const GameScreen = observer(function GameScreen() {
     <div className={`game`} data-state={game.state} onPointerDown={handlePointerDown}>
       <Settings />
       <div className="score">Score: {game.score}</div> {/* Display the score */}
+      <div className="timer">Time: {game.remainingTime}s</div> {/* Display the timer */}
+      {game.state === 'game_over' && <div className="game-over">Game Over</div>}{' '}
+      {/* Display game over message */}
       <CurrentWord />
       <Celebration />
     </div>

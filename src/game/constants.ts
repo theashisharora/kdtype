@@ -8,6 +8,8 @@ export const GAME_EVENTS = [
   'input_right',
   'word_start',
   'word_complete',
+  'game_over',
+  'game_won',
 ] as const
 
 export const ALL_WORDS = SANSKRIT_WORDS.map((entry) => ({
@@ -28,4 +30,6 @@ export const EVENT_SOUNDS: Record<typeof GAME_EVENTS[number], HTMLAudioElement |
   input_right: new Audio(`audio/input_right.mp3`),
   word_start: null,
   word_complete: new Audio(`audio/word_complete.mp3`),
+  game_over: null,
+  game_won: null,
 }

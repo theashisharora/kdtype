@@ -281,3 +281,36 @@ body {
   right: 50px;
   color: black;
 }
+
+.timer {
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  color: black;
+}
+
+.game-over {
+  font-size: 48px;
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.game-over, .game-won {
+  font-size: 48px;
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.game-won {
+  color: green;
+}
