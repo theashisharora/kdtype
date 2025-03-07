@@ -301,7 +301,8 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.game-over, .game-won {
+.game-over,
+.game-won {
   font-size: 48px;
   font-weight: bold;
   color: red;
