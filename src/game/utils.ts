@@ -53,3 +53,18 @@ export function sampleAndRemove(words: { word: string; pronunciation: string; me
 export function randomIndex(arr: unknown[]): number {
   return Math.floor(Math.random() * arr.length)
 }
+
+/**
+ * Shuffle the characters of a string.
+ *
+ * @param str The string to shuffle.
+ * @returns The shuffled string.
+ */
+export function shuffleString(str: string): string {
+  const arr = str.split('')
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr.join('')
+}

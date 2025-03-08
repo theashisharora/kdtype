@@ -20,9 +20,9 @@ export const CurrentWord = observer(function CurrentWord() {
 
   return (
     <div className="currentword">
-      <div className="pronunciation">{game.currentPronunciation}</div>
+      <div className="pronunciation">{game.shuffledPronunciation}</div>{' '}
+      {/* Display shuffled pronunciation */}
       <input ref={rInput} className="input" autoFocus />
-
       {syllables.map((syllable, i) => (
         <span
           key={i}
@@ -39,7 +39,6 @@ export const CurrentWord = observer(function CurrentWord() {
           {syllable}
         </span>
       ))}
-
       <div className="meaning">Meaning: {game.currentMeaning}</div>
     </div>
   )

@@ -260,6 +260,7 @@ body {
 .pronunciation {
   font-size: 0.3em;
   display: flex;
+  letter-spacing: 10px;
   align-items: center;
   justify-content: center;
   position: relative;

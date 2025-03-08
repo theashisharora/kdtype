@@ -1,7 +1,7 @@
 import { EventEmitter } from 'eventemitter3'
 import { action, computed, makeObservable, observable } from 'mobx'
 import { ALL_WORDS, GAME_EVENTS } from './constants'
-import { isNotProfane, sampleAndRemove } from './utils'
+import { isNotProfane, sampleAndRemove, shuffleString } from './utils'
 
 export type GameState =
   | 'game_starting'
@@ -75,7 +75,7 @@ export class Game extends EventEmitter<GameEvents> {
    * The current time limit for each word.
    * @public
    */
-  @observable currentTimeLimit = 10 // Initial time limit
+  @observable currentTimeLimit = 20 // Initial time limit
 
   private timerId: NodeJS.Timeout | null = null
 
@@ -93,6 +93,14 @@ export class Game extends EventEmitter<GameEvents> {
    */
   @computed get currentPronunciation() {
     return this._currentWord.pronunciation
+  }
+
+  /**
+   * The shuffled pronunciation.
+   * @public
+   */
+  @computed get shuffledPronunciation() {
+    return shuffleString(this._currentWord.pronunciation)
   }
 
   /**
