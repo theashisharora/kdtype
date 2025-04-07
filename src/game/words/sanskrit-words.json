@@ -1,17 +1,17 @@
 [
   {
     "word": "ध र्म",
-    "pronunciation": "dharma",
+    "pronunciation": "dharam",
     "meaning": "duty, righteousness"
   },
   {
     "word": "क र्म",
-    "pronunciation": "karma",
+    "pronunciation": "karam",
     "meaning": "action, deed"
   },
   {
     "word": "यो ग",
-    "pronunciation": "yoga",
+    "pronunciation": "yoog",
     "meaning": "union, discipline"
   },
   {
@@ -20,7 +20,7 @@
     "meaning": "illusion"
   },
   {
-    "word": "श कि त",
+    "word": "श क्ति",
     "pronunciation": "shakti",
     "meaning": "power, energy"
   },
@@ -41,7 +41,7 @@
   },
   {
     "word": "अ हिं सा",
-    "pronunciation": "ahimsa",
+    "pronunciation": "ahinsa",
     "meaning": "non-violence"
   },
   {
@@ -50,13 +50,13 @@
     "meaning": "devotion"
   },
   {
-    "word": "ज्ञा न",
-    "pronunciation": "jnana",
-    "meaning": "knowledge"
+    "word": "म क रः",
+    "pronunciation": "makarh",
+    "meaning": "Crocodile"
   },
   {
     "word": "ध्या न",
-    "pronunciation": "dhyana",
+    "pronunciation": "dhyaan",
     "meaning": "meditation"
   },
   {
@@ -73,5 +73,25 @@
     "word": "वै रा ग्य",
     "pronunciation": "vairagya",
     "meaning": "detachment"
+  },
+  {
+    "word": "शा न्त",
+    "pronunciation": "shaant",
+    "meaning": "Calm"
+  },
+  {
+    "word": "न दी",
+    "pronunciation": "nadii",
+    "meaning": "River"
+  },
+  {
+    "word": "मा री चिः",
+    "pronunciation": "marichi",
+    "meaning": "Alkaid (star in Ursha Major)"
+  },
+  {
+    "word": " श य्या",
+    "pronunciation": "shayyaa",
+    "meaning": "Bed"
   }
 ]
